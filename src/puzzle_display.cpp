@@ -34,14 +34,7 @@ void PuzzleDisplay::draw(sf::RenderTarget& target, sf::RenderStates states) cons
             int cellX = value.second*cellWidth;
             int cellY = value.first*cellHeight;
 
-            if (!solved && value.first == rows-1 && value.second == columns-1)
-            {
-                sf::RectangleShape rect;
-                rect.setPosition({1.0f*x, 1.0f*y});
-                rect.setSize({1.0f*cellWidth, 1.0f*cellHeight});
-                target.draw(rect, states);
-            }
-            else
+            if (solved || !(value.first == rows-1 && value.second == columns-1))
             {
                 sprite.setTextureRect({cellX, cellY, cellWidth, cellHeight});
                 sprite.setPosition({1.0f*x, 1.0f*y});

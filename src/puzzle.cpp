@@ -1,4 +1,6 @@
 #include <puzzle.hpp>
+#include <iostream>
+#include <cmath>
 
 Puzzle::Puzzle(int rows, int columns)
 : d_data(rows*columns)
@@ -79,6 +81,22 @@ bool Puzzle::left()
 bool Puzzle::right()
 {
     return move(0, -1);
+}
+bool Puzzle::moveTo(int row, int column)
+{
+    int countRow = row - d_emptyRow;
+    int countColumn = column - d_emptyColumn;
+    if (countRow != 0 && countColumn != 0)
+        return false;
+
+    int count = std::abs(countRow == 0 ? countColumn : countRow);
+    int rowDir = (countRow > 0) - (countRow < 0);
+    int columnDir = (countColumn > 0) - (countColumn < 0);
+
+    for(int i = 0; i < count; i++)
+        if (!move(rowDir, columnDir))
+            return false;
+    return true;
 }
 
 std::pair<int, int> Puzzle::get(int row, int column) const

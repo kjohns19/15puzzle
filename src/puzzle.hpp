@@ -21,6 +21,7 @@ public:
     bool down();
     bool left();
     bool right();
+    bool moveTo(int row, int column);
 
     std::pair<int, int> get(int row, int column) const;
 

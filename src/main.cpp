@@ -38,7 +38,13 @@ int main(int argc, char* argv[])
         {
             if (event.type == sf::Event::Closed)
                 window.close();
-            if (event.type == sf::Event::KeyPressed)
+            else if (event.type == sf::Event::MouseButtonPressed)
+            {
+                int row = event.mouseButton.y * rows / height;
+                int column = event.mouseButton.x * columns / width;
+                puzzle.moveTo(row, column);
+            }
+            else if (event.type == sf::Event::KeyPressed)
             {
                 if (event.key.code == sf::Keyboard::Up)
                     puzzle.up();
@@ -58,7 +64,7 @@ int main(int argc, char* argv[])
             scrambleTime++;
         }
 
-        window.clear();
+        window.clear(sf::Color::White);
         window.draw(display);
         window.display();
     }
